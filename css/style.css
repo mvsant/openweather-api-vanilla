@@ -6,7 +6,7 @@
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-image: url(../img/bg-sunny.jpg);
+    background-image: url(./img/bg-sunny.jpg);
     background-size: cover;
     background-position: top center;
 }

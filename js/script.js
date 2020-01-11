@@ -17,7 +17,8 @@ function getResults(query) {
         .then(weather => {
             return weather.json();
         })
-        .then(displayResults);
+        .then(displayResults)
+        .catch(error => alert('Erro na busca. Tente novamente.') );
 }
 
 function displayResults(weather) {
@@ -33,7 +34,7 @@ function displayResults(weather) {
     temp.innerHTML = `${Math.round(weather.main.temp)} <span>°c</span>`;
 
     let weather_el = document.querySelector('.current .weather');
-    weather_el.innerText = weather.weather[0].main;
+    weather_el.innerText = weather.weather[0].description;
 
     let hiLow = document.querySelector('.hi-low');
     hiLow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
@@ -42,8 +43,8 @@ function displayResults(weather) {
 }
 
 function dateBuilder(d) {
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let months = ["Janeiro", "Fevereiro", "março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    let days = ["Domingo", "Segunda-feira", "terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
 
 
     let day = days[d.getDay()];
@@ -51,7 +52,7 @@ function dateBuilder(d) {
     let month = months[d.getMonth()];
     let year = d.getFullYear();
 
-    return `${day} ${date} ${month} ${year}`;
+    return `${day} ${date} de ${month} de ${year}`;
 }
 
 function handleBackground(id) {

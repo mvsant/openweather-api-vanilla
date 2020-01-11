@@ -9,6 +9,7 @@ searchBox.addEventListener('keypress', setQuery);
 function setQuery(evt) {
     if (evt.keyCode == 13) {
         getResults(searchBox.value);
+        searchBox.value='';
     }
 }
 
@@ -72,11 +73,11 @@ function handleBackground(id) {
         case (id < 800):
             body.style.backgroundImage = 'url(img/bg-windy.jpg)';
             break;
-        case (id > 800):
-            body.style.backgroundImage = 'url(img/bg-cloudly.jpg)';
+        case (id < 801):
+            body.style.backgroundImage = 'url(img/bg-sunny.jpg)';
             break;
         default:
-            body.style.backgroundImage = 'url(img/bg-sunny.jpg)';
+            body.style.backgroundImage = 'url(img/bg-cloudly.jpg)';
             break;
     }
 }

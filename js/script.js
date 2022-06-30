@@ -9,35 +9,41 @@ searchBox.addEventListener('keypress', setQuery);
 function setQuery(evt) {
     if (evt.keyCode == 13) {
         getResults(searchBox.value);
-        searchBox.value='';
+        searchBox.value = '';
     }
 }
 
 function getResults(query) {
-    fetch(`${api.base}weather?q=${query}&units=metric&lang=pt&APPID=${api.key}`)
+    fetch(`${api.base}weather?q=${query}&units=metric&lang=en&APPID=${api.key}`)
         .then(weather => {
             return weather.json();
         })
-        .then(displayResults);
+        .then(displayResults)
+        .catch((error) => {
+            console.log(error);
+            alert("Location not found. Please try another search.");
+        });
 }
 
 function displayResults(weather) {
-    console.log(weather.weather[0].id);
     let city = document.querySelector('.location .city');
     city.innerText = `${weather.name}, ${weather.sys.country}`;
+    typewrithem();
 
     let now = new Date();
     let date = document.querySelector('.location .date');
     date.innerText = dateBuilder(now);
+    typewrithem({target:'.date', caret:'←'});
+
 
     let temp = document.querySelector('.current .temp');
-    temp.innerHTML = `${Math.round(weather.main.temp)} <span>°c</span>`;
+    temp.innerHTML = `${Math.round(weather.main.temp)} <span> °C</span>`;
 
     let weather_el = document.querySelector('.current .weather');
     weather_el.innerText = weather.weather[0].main;
 
     let hiLow = document.querySelector('.hi-low');
-    hiLow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
+    hiLow.innerText = `${Math.round(weather.main.temp_min)} °C / ${Math.round(weather.main.temp_max)} °C`;
 
     handleBackground(weather.weather[0].id);
 }
@@ -81,3 +87,5 @@ function handleBackground(id) {
             break;
     }
 }
+typewrithem();
+typewrithem({target:'.date', caret:'←'});XMLDocument

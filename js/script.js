@@ -28,12 +28,10 @@ function getResults(query) {
 function displayResults(weather) {
     let city = document.querySelector('.location .city');
     city.innerText = `${weather.name}, ${weather.sys.country}`;
-    typewrithem();
 
     let now = new Date();
     let date = document.querySelector('.location .date');
     date.innerText = dateBuilder(now);
-    typewrithem({target:'.date', caret:'←'});
 
 
     let temp = document.querySelector('.current .temp');
@@ -87,5 +85,3 @@ function handleBackground(id) {
             break;
     }
 }
-typewrithem();
-typewrithem({target:'.date', caret:'←'});XMLDocument
